@@ -1,10 +1,16 @@
 function plotData() {
   var crimes = ["hurtos", "robos", "homicidios"],
-      selectCrime = crimes.indexOf($(".dropdown span.text").text().toLowerCase()),
+      crimeTitle = $(".dropdown span.text").text().toLowerCase(),
+      selectCrime = crimes.indexOf(crimeTitle),
       selectGrade = $("button.btn.selected").text() * 1;
 
   if (isNaN(selectCrime) || selectCrime < 0) {
     return;
+  }
+
+  try {
+    window.location.hash = '#' + selectGrade + '-' + crimeTitle;
+  } catch(e) {
   }
 
   // console.log("./csvs/csv_" + selectGrade + "_" + selectCrime + ".csv");
@@ -65,5 +71,18 @@ function plotData() {
 }
 
 $(document).ready(function() {
+  if (window.location.hash && window.location.hash.split("-").length === 2) {
+    var details = window.location.hash.split("-"),
+        setGrade = details[0].substring(1) * 1,
+        setCrime = details[1];
+    $(".dropdown span.text").text(setCrime);
+
+    $(".btn-toolbar button.btn").removeClass("selected");
+    $(".btn-toolbar button.btn").each(function(id, button) {
+      if ($(button).text() * 1 === setGrade) {
+        $(button).addClass("selected");
+      }
+    });
+  }
   plotData();
 });
