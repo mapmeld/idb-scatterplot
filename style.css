@@ -1,0 +1,19 @@
+.jumbotron {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.setting-pill {
+  padding: 40px;
+  padding: 5vh;
+  border: 2px solid #000;
+  border-radius: 40px;
+  font-size: 14pt;
+  cursor: pointer;
+}
+.setting-pill.selected,
+.btn-toolbar button.selected,
+.btn-toolbar .btn-default:active,
+.btn-toolbar .btn-default:hover {
+  border-color: darkblue;
+  background: lightblue;
+}
